@@ -37,7 +37,7 @@ export interface Country {
 ## To use it in a Deno App
 
 ```
-import {Country, getCountries} from 'https://github.com/shangab/denocountries/index.ts'
+import {Country, getCountries} from "https://raw.githubusercontent.com/shangab/denocountries/main/mod.ts"
 
 const res:Country[] = await getCountries("can")
 console.log(res)
