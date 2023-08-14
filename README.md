@@ -1,5 +1,5 @@
 # Deno Countries STD Library
-
+### Author: Abubaker Shangab
 ## This Deno module relies on the RESTful free API: https:restcountries.com to get the countries data.
 1. The module exports a function getCountries(partOfName: string): Promise<Country[]> that returns a promise of an array of countries.
 2. The function takes a string as a parameter, and returns a promise of an array of countries.

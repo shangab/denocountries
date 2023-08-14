@@ -1,3 +1,4 @@
+// Copyright 2018-2023 the Deno authors. All rights reserved. MIT license.
 export interface Country {
   name: string;
   nativeName: string;
@@ -12,11 +13,10 @@ export interface Country {
   flag: string;
 }
 export const getCountries = (partOfName: string): Promise<Country[]> => {
-  return new Promise(async (resolve, reject) => {
+  return new Promise<Country[]>(async (resolve, reject) => {
     const url = `https://restcountries.com/v3.1/name/${partOfName}`;
     const response = await fetch(url, { method: "GET" });
     if (response.status == 200) {
-      
       response.json().then((data) => {
         const countries: Country[] = [];
         for (let idx = 0; idx < data.length; idx++) {
@@ -30,7 +30,7 @@ export const getCountries = (partOfName: string): Promise<Country[]> => {
             currency: one["currencies"][Object.keys(one["currencies"])[0]]["name"],
             currencyCode: Object.keys(one["currencies"])[0],
             currencySymbol: one["currencies"][Object.keys(one["currencies"])[0]]["symbol"],
-            callCode: one["idd"]['root']+one["idd"]['suffixes'][0],
+            callCode: one["idd"]["root"] + one["idd"]["suffixes"][0],
             latLng: one["latlng"],
             flag: one["flags"]["png"],
           };
@@ -43,7 +43,9 @@ export const getCountries = (partOfName: string): Promise<Country[]> => {
         resolve(countries);
       });
     } else {
-      reject("No countries found, or connection error to : https://restcountries.com");
+      reject(
+        "Connection error to : https://restcountries.com",
+      );
     }
   });
 };
